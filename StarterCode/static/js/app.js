@@ -1,102 +1,59 @@
 // from data.js
 var tableData = data;
+console.log(tableData);
 
-// YOUR CODE HERE!
-// select the table body
+// Get a reference to the table body
 var tbody = d3.select("tbody");
 
-// select the user input form field
-var dateSelect = d3.select("#datetime");
+// UFO Sighting values for each column
+tableData.forEach(function(ufoSighting) {
+    console.log(ufoSighting);
+    // Append one table row `tr` for each UFO Sighting object
+    var row = tbody.append("tr");
 
-// select the 'Filter Table' button
-var filterButton = d3.select("#filter-btn");
-
-// select the 'Reset Table' button
-var resetButton = d3.select("#reset-btn");
-
-// function to clear the table body to prepare for new data display
-function clearTable() {
-    tbody.html("");
-};
-
-// create a function to reset the table to default
-function resetTable() {
-
-    // clear the current data
-    clearTable();
-
-    // use forEach and Object.values to populate the initial table
-    data.forEach((ufoSighting) => {
-        var row = tbody.append("tr");
-        Object.values(ufoSighting).forEach(value => {
-            var cell = row.append("td");
-            cell.text(value);
-            cell.attr("class", "table-style");
-        }); // close second forEach
-    }); // close first forEach
-
-    // populate the filter date dropdown menu
-    // create an array to store dates for option values
-    // using Set to get unique values and then making an array from the set
-    var dates = Array.from(new Set(data.map(sighting => sighting.datetime)));
-
-    // use a forEach to loop over elements in each array to populate dropdowns
-    dates.forEach(date => {
-        var option = dateSelect.append("option");
-        option.text(date);
+    // Use `Object.entries` to console.log each UFO Sighting value
+    Object.entries(ufoSighting).forEach(function([key, value]) {
+      console.log(key, value);
+      // Append a cell to the row for each value
+      var cell = row.append("td");
+      cell.text(value);
     });
-}; // close function resetTable()
+  });
 
 
-// create a function to update table according to the date input by the user
-function filterTable() {
-    // Prevent the page from refreshing
-    d3.event.preventDefault();
+// Select the button
+var button = d3.select("#filter-btn");
+button.on("click", function() {
 
-    // get the user input for filtering 
-    var inputDate = dateSelect.property("value")
+    tbody.html("");
 
-    // make a copy of the data for filtering
-    var filteredData = data;
-
-    // if there is a date input, filter the table according to the date
-    if (inputDate) {
-        filteredData = filteredData.filter(sighting => sighting.datetime == inputDate);
-    }
-
-    // reset the table
-    clearTable();
-
-    // use forEach and Object.values to populate the tbody with filtered data
-    filteredData.forEach((ufoSighting) => {
-
-        // create a new row for every sighting object
-        var row = tbody.append("tr");
-
-        // iterate through each object's values to populate cells
-        Object.values(ufoSighting).forEach(value => {
-
-            // create a new cell for each item in the object
-            var cell = row.append("td");
-
-            // populate the td text with the value
-            cell.text(value);
-            cell.attr("class", "table-style");
-        }); // close second forEach
-
-    }); // close first forEach
-
-}; // close function filterTable()
+    // Select the input date get the raw HTML nodes
+    var inputElement = d3.select("#datetime");
+    // Get the value property of the input date, state, shape
+    var inputValue = inputElement.property("value");
+    // console.log input value
+    console.log(inputValue);
+    // Filter Data with datetime equal to input value
+    var filteredData = tableData.filter(sighting => sighting.datetime === inputValue);
+    // console.log filter values
+    console.log(filteredData);
 
 
-// initially populate the table by default
-resetTable();
+    filteredData.forEach(function(selections) {
 
-// use the `on` function in d3 to attach a click event to the handler function for filterButton
-filterButton.on("click", filterTable);
+    console.log(selections);
+    // Append one table row `tr` for each UFO Sighting object
+    var row = tbody.append("tr");
+    // Use `Object.entries` to console.log each UFO Sighting value
+    Object.entries(selections).forEach(function([key, value]) {
+        console.log(key, value);
+        // Append a cell to the row for each value
+        var cell = row.append("td");
+        cell.text(value);
+    });
+});
+});
 
-// use the `on` function in d3 to attach a click event to the handler function for resetButton
-resetButton.on("click", resetTable);
 
 
 

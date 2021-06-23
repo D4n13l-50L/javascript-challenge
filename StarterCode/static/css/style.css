@@ -49,7 +49,7 @@ body {
   bottom: 5px;
   left: 150px;
   width: 35px;
-  color: white;
+  color: black;
 }
 
 /* Adding styles to the aside and filter form */
@@ -98,7 +98,7 @@ select {
   padding: 20px;
   margin: 0;
   background: black;
-  background-image: url("../images/nasa.jpg");
+  background-image: url("../images/nasa2.jpg");
   background-attachment: fixed;
   background-position: bottom center;
   background-size: cover;
@@ -120,7 +120,7 @@ select {
 /* input placeholder color changes */
 .form-control::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: #8e979f;
+  color: #010911;
 }
 
 .form-control::-moz-placeholder {
@@ -135,7 +135,7 @@ select {
 
 .form-control:-moz-placeholder {
   /* Firefox 18- */
-  color: #8e979f;
+  color: #01070c;
 }
 
 /* media queries which will only be activated at specific screen sizes */
